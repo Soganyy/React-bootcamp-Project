@@ -1,20 +1,45 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import './SearchBox.css';
+import { useDispatch, useSelector } from 'react-redux'
 
 function SearchBox() {
-
+    
+    const input = useSelector(
+        function(state) {
+            return state.inputValue;
+        }
+    )
 
     useEffect(
         function(){
- 
+
         },[]
     )
-    
+
+    const dis = useDispatch();
     let searchLineChangeHandler = (e) => {
-        
+        dis({
+            type: "inputChange",
+            value: e.target.value
+        })
     }
+
     let searchBoxSubmitHandler = (e) => {
-            }
+        e.preventDefault();
+        
+        async function fetchData() {
+            let response = await fetch(`http://www.omdbapi.com/?t=${input}&apikey=9ad2bb5d&`)
+            let data = await response.json();
+
+            dis({
+                type: 'submitForm',
+                dataFromApi: data
+            })
+        }
+
+        fetchData();
+    }
+
 
     return (
         <div className="search-box">
