@@ -13,6 +13,6 @@ root.render(
       <Provider store={myStore}>
         <App />
       </Provider>
-    </BrowserRouter>   
+    </BrowserRouter>
   </React.StrictMode>
 );

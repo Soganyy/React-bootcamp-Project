@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function Favorites() {
 
-    const favoriteMovies = useSelector(
+    const dataFromStore = useSelector(
         function(state) {
             return state;
         }
     )
+
+    console.log(dataFromStore)
 
     const dis = useDispatch();
 
@@ -16,7 +18,7 @@ function Favorites() {
 
         let indexOfElement;
 
-        favoriteMovies.favoriteList.filter(function(currentValue, index){
+        dataFromStore.favoriteList.filter(function(currentValue, index){
             if(currentValue.imdbID === imdbID){
                 indexOfElement = index;
             }
@@ -38,15 +40,15 @@ function Favorites() {
 
     const createLinkOfFavorites = () => {
 
-        if(favoriteMovies.favoritesListName !== ""){
+        if(dataFromStore.favoritesListName !== ""){
             fetch(`https://acb-api.algoritmika.org/api/movies/list`, {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                title: favoriteMovies.favoritesListName,
-                movies: favoriteMovies.favoriteList
+                title: dataFromStore.favoritesListName,
+                movies: dataFromStore.favoriteList
             })
         })
         .then((response) => {return response.json()})
@@ -65,13 +67,13 @@ function Favorites() {
 
     return (
         <div className="favorites">
-            <input type="text" onChange={listOfFavoritesName} value={favoriteMovies.favoritesListName} />
+            <input type="text" onChange={listOfFavoritesName} value={dataFromStore.favoritesListName} />
             <button onClick={createLinkOfFavorites}>Get Links</button>
 
             <br/><br/>
-            Əlavə edilmiş elementlərin sayı : {favoriteMovies.favoriteList.length} 
+            Əlavə edilmiş elementlərin sayı : {dataFromStore.favoriteList.length} 
              <ul className="favorites__list">
-                {favoriteMovies.favoriteList.map((item, index) => {
+                {dataFromStore.favoriteList.map((item, index) => {
                     return <li className='list-item' key={index}>{item.Title} ({item.Year})
                         <button type="button" onClick={() =>ItemDeleteHandler(item.imdbID)} className="favorites__delete">x</button>
                     </li>

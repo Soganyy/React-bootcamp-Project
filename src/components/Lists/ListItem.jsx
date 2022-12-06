@@ -8,7 +8,6 @@ export default function ListItem() {
     const [state, changeState] = useState([]);
 
     let params = useParams();
-    // console.log(params.id)
     
     useEffect(function() {
         fetch(`https://acb-api.algoritmika.org/api/movies/list/${params.id}`)

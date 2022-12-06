@@ -13,7 +13,7 @@ class App extends React.Component {
         <Link to="">Home Page</Link>
 
         <Routes>
-          <Route element={<MainPage />} path=""> </Route>
+          <Route path="" element={<MainPage />}> </Route>
           <Route path="/ListItem:id" element={<ListItem />}></Route>
         </Routes>
       </div>
