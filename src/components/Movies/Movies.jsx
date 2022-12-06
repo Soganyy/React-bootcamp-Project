@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 function Movies() {
 
-    const input = useSelector(
+    const movie = useSelector(
         function(state) {
             return state;
         }
@@ -13,7 +13,7 @@ function Movies() {
 
     return (
         <ul className="movies">
-            {input.data.map((movie) => (
+            {movie.data.map((movie) => (
                 <li className="movies__item" key={movie.imdbID}>
                     <MovieItem {...movie} />
                 </li>

@@ -1,6 +1,6 @@
 import React, { Component, useEffect, useState } from 'react';
 import './SearchBox.css';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux';
 
 function SearchBox() {
     
@@ -28,13 +28,19 @@ function SearchBox() {
         e.preventDefault();
         
         async function fetchData() {
-            let response = await fetch(`http://www.omdbapi.com/?t=${input}&apikey=9ad2bb5d&`)
+            let response = await fetch(`http://www.omdbapi.com/?s=${input}&apikey=9ad2bb5d&`)
             let data = await response.json();
-
-            dis({
-                type: 'submitForm',
-                dataFromApi: data
-            })
+            // console.log(data)
+            if(data.Response === "True"){
+                dis({
+                    type: 'submitForm',
+                    dataFromApi: data.Search
+                })
+            } else {
+                dis({
+                    type: "reset",
+                })
+            }
         }
 
         fetchData();
@@ -47,7 +53,7 @@ function SearchBox() {
                 <label className="search-box__form-label">
                     Искать фильм по названию:
                     <input
-                        // value={inputValue}
+                        value={input}
                         type="text"
                         className="search-box__form-input"
                         placeholder="Например, Shawshank Redemption"
