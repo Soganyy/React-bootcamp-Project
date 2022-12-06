@@ -1,7 +1,9 @@
 const obj = {
     data: [],
     favoriteList: [],
-    inputValue: ""
+    inputValue: "",
+    favoritesListName: "",
+    lists: []
 }
 
 function reducer(state = obj, action) {
@@ -17,6 +19,10 @@ function reducer(state = obj, action) {
         case "deleteElement":
             state.favoriteList.splice(action.index, 1)
             return state = {...state, favoriteList: [...state.favoriteList]}
+        case "FavouritesListNameValue":
+            return state = {...state, favoritesListName: action.value}
+        case "createList":
+            return state = {...state, favoritesListName: "", lists: [...state.lists, action.payload], favoriteList: []}
         default: return state;
     }
 }
