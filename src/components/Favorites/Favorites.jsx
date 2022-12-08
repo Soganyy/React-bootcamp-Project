@@ -10,8 +10,6 @@ function Favorites() {
         }
     )
 
-    console.log(dataFromStore)
-
     const dis = useDispatch();
 
     function ItemDeleteHandler(imdbID) {
